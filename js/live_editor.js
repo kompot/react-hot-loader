@@ -70,8 +70,7 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
 
   propTypes: {
     codeText: React.PropTypes.string.isRequired,
-    transformer: React.PropTypes.func,
-    renderCode: React.PropTypes.bool
+    transformer: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -124,6 +123,8 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
   },
 
   componentDidMount: function() {
+    // Note: we also inject a fake hook for this to work
+    this.makeHot = ReactHotAPI(__REACT_DEVTOOLS_GLOBAL_HOOK__._reactRuntime.Mount);
     this.executeCode();
   },
 
@@ -140,19 +141,15 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
     var mountNode = this.refs.mount.getDOMNode();
 
     try {
-      React.unmountComponentAtNode(mountNode);
-    } catch (e) { }
-
-    try {
+      var module = {};
       var compiledCode = this.compileCode();
-      if (this.props.renderCode) {
-        React.render(
-          React.createElement(CodeMirrorEditor, {codeText: compiledCode, readOnly: true}),
-          mountNode
-        );
-      } else {
-        eval(compiledCode);
-      }
+      var makeHot = this.makeHot;
+      compiledCode += [
+        'module.exports = makeHot(module.exports, "module.exports")',
+        'React.render(React.createElement(module.exports), mountNode)',
+      ].join('\n');
+
+      eval(compiledCode);
     } catch (err) {
       this.setTimeout(function() {
         React.render(
