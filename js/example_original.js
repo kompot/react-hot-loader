@@ -27,7 +27,7 @@ var BEST_JS_LIBS = [
 // First, type “rx” into the input to the right.
 // Have you typed “rx” there? True-true? Then uncomment this line:
 
-// BEST_JS_LIBS.push({ name: 'Rx', url: 'http://http://reactivex.io/' });
+// BEST_JS_LIBS.push({ name: 'Rx', url: 'http://reactivex.io/' });
 
 module.exports = React.createClass({
   getInitialState() { return { query: '' }; },
