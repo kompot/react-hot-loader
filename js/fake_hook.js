@@ -1,4 +1,4 @@
-if (!__REACT_DEVTOOLS_GLOBAL_HOOK__ || !__REACT_DEVTOOLS_GLOBAL_HOOK__.inject) {
+if (!window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
   Object.defineProperty(
     window, '__REACT_DEVTOOLS_GLOBAL_HOOK__', {value: {
       inject: function(runtime) { this._reactRuntime = runtime; },

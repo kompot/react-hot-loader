@@ -281,8 +281,10 @@ small code,li code,p code {
 .playgroundCode {
     border-radius: 0 3px 3px 3px;
     float: left;
-    overflow: hidden;
+    overflow: auto;
     width: 600px;
+    font-size: 0.8rem;
+    max-height: 80vh;
 }
 
 .playgroundPreview {
@@ -296,6 +298,7 @@ small code,li code,p code {
 .playgroundError {
     color: #c5695c;
     font-size: 15px;
+    padding: 15px 20px;
 }
 
 .MarkdownEditor textarea {

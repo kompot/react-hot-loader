@@ -76,7 +76,7 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
   getDefaultProps: function() {
     return {
       transformer: function(code) {
-        return JSXTransformer.transform(code).code;
+        return JSXTransformer.transform(code, { harmony: true }).code;
       }
     };
   },
@@ -84,6 +84,7 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
   getInitialState: function() {
     return {
       code: this.props.codeText,
+      error: null
     };
   },
 
@@ -107,8 +108,8 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
         key: "jsx",
         onChange: this.handleCodeChange,
         className: "playgroundStage",
-        codeText: this.state.code}
-      );
+        codeText: this.state.code
+      });
 
     return (
       React.createElement("div", {className: "playground"},
@@ -116,7 +117,8 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
           JSXContent
         ),
         React.createElement("div", {className: "playgroundPreview"},
-          React.createElement("div", {ref: "mount"})
+          React.createElement("div", {ref: "mount"}),
+          this.state.error && React.createElement("div", {className: "playgroundError"}, this.state.error)
         )
       )
     );
@@ -129,10 +131,7 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
   },
 
   componentDidUpdate: function(prevProps, prevState) {
-    // execute code only when the state's not being updated by switching tab
-    // this avoids re-displaying the error, which comes after a certain delay
-    if (this.props.transformer !== prevProps.transformer ||
-        this.state.code !== prevState.code) {
+    if (this.state.code !== prevState.code) {
       this.executeCode();
     }
   },
@@ -144,19 +143,21 @@ var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
       var module = {};
       var compiledCode = this.compileCode();
       var makeHot = this.makeHot;
-      compiledCode += [
-        'module.exports = makeHot(module.exports, "module.exports")',
-        'React.render(React.createElement(module.exports), mountNode)',
-      ].join('\n');
 
       eval(compiledCode);
+      eval([
+        'if (module.exports) {',
+        '  module.exports = makeHot(module.exports, "module.exports");',
+        '  React.render(React.createElement(module.exports), mountNode);',
+        '}'
+      ].join('\n'));
+      this.setState({
+        error: null
+      });
     } catch (err) {
-      this.setTimeout(function() {
-        React.render(
-          React.createElement("div", {className: "playgroundError"}, err.toString()),
-          mountNode
-        );
-      }, 500);
+      this.setState({
+        error: err.toString()
+      });
     }
   }
 });
