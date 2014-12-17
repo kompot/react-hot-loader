@@ -57,9 +57,9 @@ module.exports = React.createClass({
 
     if (query.length > 0) {
       libs = libs.filter(
-        lib => lib.name.toLowerCase().match(query)
-        // Feeling lucky? Swap the line above with the line below:
+        // Feeling lucky? Try swapping these lines:
         // () => Math.random() > 0.5
+        lib => lib.name.toLowerCase().match(query)
       );
     }
 
