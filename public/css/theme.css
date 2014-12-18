@@ -144,7 +144,11 @@ a:hover:after {
   font-size: .75rem;
   color: #AAAAAA;
 }
-
+.header-logo {
+  width: 10rem;
+  height: 10rem;
+  margin: 0 auto;
+}
 
 /*
 * Header
