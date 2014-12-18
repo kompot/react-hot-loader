@@ -3,24 +3,23 @@ layout: default
 title: Home
 ---
 
-<div class="post">
-  <h1 class="post-title">react-hot-loader</h1>
-  <p>
-    Live edit your React components without unmounting or losing their state.
-    <br>
-    Any editor, no browser plugins.
-  </p>
-  <h2>How it feels</h2>
-  <p>
+{% include header.html %}
+
+<div class="page">
+  <h1 class="page-title">How it feels</h1>
+  <p class="page-subtitle">
     Edit the component below. It will update without interrupting.
   </p>
+  
   <div id='example'></div>
-  <script>
-var HELLO_COMPONENT = ("\nmodule.exports = React.createClass({\n  getInitialState: function () {\n     return { counter: 0 };\n  },\n  componentWillUnmount: function () {\n    alert('Unmounting!');\n  },\n  componentDidMount: function () {\n    setInterval(this.tick, 1000);\n  },\n  tick: function () {\n    this.setState({ counter: this.state.counter + 1 });\n  },\n  render: function() {\n    return <div>Counter: {this.state.counter}</div>;\n  }\n});\n");
 
-React.render(
-  React.createElement(ReactPlayground, {codeText: HELLO_COMPONENT}),
-  document.getElementById('example')
-);
+  <script>
+    var HELLO_COMPONENT = ("\nmodule.exports = React.createClass({\n  getInitialState: function () {\n     return { counter: 0 };\n  },\n  componentWillUnmount: function () {\n    alert('Unmounting!');\n  },\n  componentDidMount: function () {\n    setInterval(this.tick, 1000);\n  },\n  tick: function () {\n    this.setState({ counter: this.state.counter + 1 });\n  },\n  render: function() {\n    return <div>Counter: {this.state.counter}</div>;\n  }\n});\n");
+
+    React.render(
+      React.createElement(ReactPlayground, {codeText: HELLO_COMPONENT}),
+      document.getElementById('example')
+    );
   </script>
+
 </div>
