@@ -1,0 +1,171 @@
+/*
+ * Contents
+ *
+ * Global resets
+ * Masthead
+ * Custom type
+ * Messages
+ * Container
+ * Masthead
+ * Posts and pages
+ * Pagination
+ * Reverse layout
+ * Themes
+ */
+
+
+/*
+ * Global resets
+ *
+ * Update the foundational and global aspects of the page.
+ */
+
+html {
+  font-family: 'Helvetica Neue', helvetica, sans-serif;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+}
+@media (min-width: 38em) {
+  html {
+    font-size: 20px;
+  }
+}
+
+
+/* Type */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 500;
+}
+
+
+/* Links */
+a {
+  color: inherit;
+  position: relative;
+  display: inline-block;
+}
+
+a:after {
+  content: "";
+  position: absolute;
+  display: block;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.2;
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: #0074D9;
+}
+a:hover:after {
+  opacity: 1;
+}
+
+
+/*
+* Masthead
+*
+* Super small header above the content for site name and short description.
+*/
+
+.masthead {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  margin: 0 auto;
+  padding: .5rem 0;
+  width: 100%;
+  max-width: 46rem;
+  text-align: center;
+  background-color: rgba(255,255,255,.95);
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  z-index: 100;
+}
+
+.masthead-title {
+  margin: 0;
+  font-size: .875rem;
+  /*color: #fff;*/
+}
+
+/* Nav */
+.nav-list {
+  margin: 0;
+  list-style: none;
+}
+
+.nav-list-item {
+  display: inline-block;
+  margin-left: .5rem;
+}
+.nav-list-item a {
+  /*font-size: .75rem;*/
+  color: #AAAAAA;
+  /*opacity: .75;*/
+}
+.nav-list-item a:after {
+  display: none;
+}
+
+.nav-list-item a:hover {
+  color: #0074D9;
+}
+
+
+/*
+* Header
+*
+* A big thing on the home page with title, description and other stuff.
+*/
+
+.header {
+  padding: 2rem 0 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.header-title {
+  font-size: 3rem;
+  letter-spacing: -.025em;
+  /*font-weight: 100;*/
+}
+.header-tagline {
+  font-size: 1rem;
+  /*color: #AAAAAA;*/
+}
+.header-description {
+  font-size: .75rem;
+  color: #AAAAAA;
+}
+
+
+/*
+* Header
+*
+* A big thing on the home page with title, description and other stuff.
+*/
+
+.footer {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(0,0,0,.1);
+  font-size: .75rem;
+  text-align: center;
+}
+
+
+
+/*
+* Page
+*/
+
+.page-title,
+.page-subtitle {
+  text-align: center;
+}
