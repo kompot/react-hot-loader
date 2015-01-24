@@ -8,7 +8,7 @@
     "source-map": "0.1.40"
   },
   "peerDependencies": {
-    "react": ">=0.11.0"
+    "react": "0.13.0-alpha.2"
   },
   "repository": {
     "type": "git",
